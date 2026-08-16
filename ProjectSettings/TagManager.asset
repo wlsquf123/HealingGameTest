@@ -4,12 +4,12 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Ainmal
+  - Animal
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - ground
   - Water
   - UI
   - 

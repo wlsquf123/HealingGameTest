@@ -11,6 +11,7 @@ public class WaterEnter : MonoBehaviour
         if (An.Animalwater < 30f)
         {
             An.Animalwater = 100f;
+            An.AddExp(3);
             Destroy(gameObject);
         }
     }

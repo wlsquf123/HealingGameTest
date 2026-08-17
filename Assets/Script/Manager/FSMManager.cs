@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class FSMManager : MonoBehaviour
@@ -26,13 +27,22 @@ public class FSMManager : MonoBehaviour
             switch (set)
             {
                 case 1:
-                    Instantiate(foodObj, pos, Quaternion.identity);
+                    if (GameManager.instance.GetPoint(10))
+                    {
+                        Instantiate(foodObj, pos, Quaternion.identity);
+                    }
                     break;
                 case 2:
-                    Instantiate(WaterObj, pos, Quaternion.identity);
+                    if (GameManager.instance.GetPoint(10))
+                    {
+                        Instantiate(WaterObj, pos, Quaternion.identity);
+                    }
                     break;
                 case 3:
-                    Instantiate(TreeObj, pos, Quaternion.identity);
+                    if (GameManager.instance.GetPoint(20))
+                    {
+                        Instantiate(TreeObj, pos, Quaternion.identity);
+                    }
                     break;
                 case 4:
                     Instantiate(foodObj, pos, Quaternion.identity);

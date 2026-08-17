@@ -25,6 +25,10 @@ public class Animal : MonoBehaviour
     public float AnimalHp = 100f;
     public float AnimalSpeed;
 
+    private float FoodTImer;
+    private float WaterAndTreeTimer;
+    private float TreeTimer;
+
     [Header("타이머")]
     public float IdleTImer;
 
@@ -42,11 +46,13 @@ public class Animal : MonoBehaviour
     public Text WaterText;
     public Text HpText;
 
+    [Header("애니메이션")]
     public Animator AnimalAnimator;
 
 
     private void Update()
     {
+        // state (상태 UI)
         LvText.text = AnimalLevel.ToString();
         ExpImage.fillAmount = AnimalExp / 10f;
         FoodImage.fillAmount = Animalfood / 100f;
@@ -75,6 +81,21 @@ public class Animal : MonoBehaviour
             case AnimalState.Rest:
 
                 break;
+        }
+
+        FoodTImer += Time.deltaTime * 2.4f;
+        WaterAndTreeTimer += Time.deltaTime * 2.4f;
+        TreeTimer += Time.deltaTime * 2.4f;
+        if (FoodTImer >= 60f)
+        {
+            FoodTImer -= 60f;
+            Animalfood = Mathf.Clamp(Animalfood - 10f, 0, 100f);
+        }
+        if (WaterAndTreeTimer >= 30f)
+        {
+            WaterAndTreeTimer -= 30f;
+            Animalwater = Mathf.Clamp(Animalwater - 10f, 0, 100f);
+            AnimalHp = Mathf.Clamp(AnimalHp - 5f, 0, 100f);
         }
     }
 
@@ -112,6 +133,12 @@ public class Animal : MonoBehaviour
         }
         else
         {
+            if (Animalfood <= 0 || Animalwater <= 0 || AnimalHp <= 0)
+            {
+                Change(AnimalState.Idle);
+                return;
+            }
+
             Change(AnimalState.Move);
             AddExp(1);
         }
@@ -130,8 +157,6 @@ public class Animal : MonoBehaviour
 
     public void MoveState()
     {
-        if (Animalfood <= 0 || Animalwater <= 0 || AnimalHp <= 0) return;
-
         transform.rotation = Quaternion.LookRotation(dir);
         transform.Translate(Vector3.forward * AnimalSpeed * Time.deltaTime);
 

@@ -11,6 +11,7 @@ public class FoodEnter : MonoBehaviour
         if (An.Animalfood < 30f)
         {
             An.Animalfood = 100f;
+            An.AddExp(5);
             Destroy(gameObject);
         }
     }

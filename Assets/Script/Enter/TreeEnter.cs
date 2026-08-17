@@ -11,6 +11,7 @@ public class TreeEnter : MonoBehaviour
         if (An.AnimalHp < 30f)
         {
             An.AnimalHp = 100f;
+            An.AddExp(4);
         }
     }
 }

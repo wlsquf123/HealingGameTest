@@ -1373,7 +1373,7 @@ MonoBehaviour:
   Animalfood: 50
   Animalwater: 50
   AnimalHp: 100
-  AnimalSpeed: 5
+  AnimalSpeed: 15
   IdleTImer: 0
   LvText: {fileID: 2563255848347662578}
   ExpImage: {fileID: 46278189996619107}

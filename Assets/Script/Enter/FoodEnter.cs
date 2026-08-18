@@ -12,6 +12,7 @@ public class FoodEnter : MonoBehaviour
         {
             An.Animalfood = 100f;
             An.AddExp(5);
+            GameManager.instance.FSMManager.FoodList.Remove(gameObject);
             Destroy(gameObject);
         }
     }

@@ -60,6 +60,8 @@ public class WeatherManager : MonoBehaviour
     {
         while (true)
         {
+            if (WeatherType != WeatherState.ÃµµÕ) break;
+
             yield return new WaitForSeconds(1f);
             int random = Random.Range(0, ThunderObj.Length);
             ThunderObj[random].SetActive(true);
@@ -78,7 +80,6 @@ public class WeatherManager : MonoBehaviour
         {
             WeatherType = 0;
         }
-
         Weathering();
     }
 }

@@ -1,8 +1,13 @@
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 
 public class FSMManager : MonoBehaviour
 {
+    public List<GameObject> FoodList;
+    public List<GameObject> WaterList;
+    public List<GameObject> TreeList;
+
     public GameObject foodObj;
     public GameObject WaterObj;
     public GameObject TreeObj;
@@ -29,19 +34,19 @@ public class FSMManager : MonoBehaviour
                 case 1:
                     if (GameManager.instance.GetPoint(10))
                     {
-                        Instantiate(foodObj, pos, Quaternion.identity);
+                        FoodList.Add(Instantiate(foodObj, pos, Quaternion.identity));
                     }
                     break;
                 case 2:
                     if (GameManager.instance.GetPoint(10))
                     {
-                        Instantiate(WaterObj, pos, Quaternion.identity);
+                        WaterList.Add(Instantiate(WaterObj, pos, Quaternion.identity));
                     }
                     break;
                 case 3:
                     if (GameManager.instance.GetPoint(20))
                     {
-                        Instantiate(TreeObj, pos, Quaternion.identity);
+                        TreeList.Add(Instantiate(TreeObj, pos, Quaternion.identity));
                     }
                     break;
                 case 4:

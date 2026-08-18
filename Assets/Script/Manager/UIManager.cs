@@ -6,11 +6,11 @@ public class UIManager : MonoBehaviour
 {
     public Text DayText;
     public Text PointText;
+    public Text WeatherText;
 
     public GameObject RatingImage;
     public GameObject[] RatingIndex;
     private Vector3 pos;
-
 
     private void Update()
     {
@@ -18,6 +18,9 @@ public class UIManager : MonoBehaviour
         GameManager gm = GameManager.instance;
         DayText.text = "Day" + gm.Day + "\n" + gm.H.ToString("00") + ":" + gm.M.ToString("00"); // 시간
         PointText.text = "포인트: " + gm.Point;
+        WeatherText.text = "현재 날씨: " + GameManager.instance.WeatherManager.WeatherType;
+
+
     }
 
 

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +12,6 @@ public enum AnimalState
     Rest,
     Idle
 }
-
 public class Animal : MonoBehaviour
 {
     public AnimalState StateType;
@@ -65,6 +65,19 @@ public class Animal : MonoBehaviour
         WaterText.text = Animalwater + " / 100";
         HpText.text = AnimalHp + "/ 100";
 
+        if (Animalwater < 30 && GameManager.instance.FSMManager.WaterList.Count > 0)
+        {
+            StateType = AnimalState.Water;
+        }
+        else if (Animalfood < 30 && GameManager.instance.FSMManager.FoodList.Count > 0)
+        {
+            StateType = AnimalState.Food;
+        }
+        else if (AnimalHp < 30 && GameManager.instance.FSMManager.TreeList.Count > 0)
+        {
+            StateType = AnimalState.Rest;
+        }
+
 
         switch (StateType)
         {
@@ -75,13 +88,13 @@ public class Animal : MonoBehaviour
                 MoveState();
                 break;
             case AnimalState.Food:
-
+                FoodState();
                 break;
             case AnimalState.Water:
-
+                WaterState();
                 break;
             case AnimalState.Rest:
-
+                TreeState();
                 break;
         }
 
@@ -152,6 +165,35 @@ public class Animal : MonoBehaviour
         }
     }
 
+    public void MoveToTarget(List<GameObject> targetList)
+    {
+        if (targetList == null || targetList.Count == 0)
+        {
+            RandomAI();
+            return;
+        }
+
+        GameObject nearestTarget = targetList[0];
+        float nearestDistance = 999999999999f;
+
+        // 가장 가까운 타겟 찾기
+        foreach (GameObject target in targetList)
+        {
+            float currentDistance = Vector3.SqrMagnitude(transform.position - target.transform.position);
+
+            if (currentDistance < nearestDistance)
+            {
+                nearestDistance = currentDistance;
+                nearestTarget = target;
+            }
+        }
+
+        // 타겟을 향해 이동
+        AnimalAnimator.Play("Move");
+        transform.LookAt(nearestTarget.transform);
+        transform.position = Vector3.MoveTowards(transform.position, nearestTarget.transform.position, currentSpeed * Time.deltaTime);
+    }
+
     public void IdleState()
     {
         IdleTImer -= Time.deltaTime * 2.4f;
@@ -162,13 +204,12 @@ public class Animal : MonoBehaviour
         }
     }
 
-
     public void MoveState()
     {
 
         if (GameManager.instance.WeatherManager.WeatherType == WeatherState.흐림)
         {
-            currentSpeed = 0.5f;
+            currentSpeed = 1f;
         }
         else
         {
@@ -182,5 +223,35 @@ public class Animal : MonoBehaviour
         {
             RandomAI();
         }
+    }
+
+    public void FoodState()
+    {
+        if (Animalfood >= 30)
+        {
+            RandomAI();
+            return;
+        }
+        MoveToTarget(GameManager.instance.FSMManager.FoodList);
+    }
+
+    public void WaterState()
+    {
+        if (Animalwater >= 30)
+        {
+            RandomAI();
+            return;
+        }
+        MoveToTarget(GameManager.instance.FSMManager.WaterList);
+    }
+
+    public void TreeState()
+    {
+        if (AnimalHp >= 30)
+        {
+            RandomAI();
+            return;
+        }
+        MoveToTarget(GameManager.instance.FSMManager.TreeList);
     }
 }

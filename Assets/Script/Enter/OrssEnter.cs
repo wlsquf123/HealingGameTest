@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WaterEnter : MonoBehaviour
+public class OrssEnter : MonoBehaviour
 {
     private void OnTriggerStay(Collider other)
     {
@@ -12,8 +12,6 @@ public class WaterEnter : MonoBehaviour
         {
             An.Animalwater = 100f;
             An.AddExp(3);
-            GameManager.instance.FSMManager.WaterList.Remove(gameObject);
-            Destroy(gameObject);
         }
     }
 }

@@ -27,7 +27,6 @@ public class Animal : MonoBehaviour
 
     private float FoodTImer;
     private float WaterAndTreeTimer;
-    private float TreeTimer;
 
     [Header("Å¸ÀÌ¸Ó")]
     public float IdleTImer;
@@ -85,7 +84,6 @@ public class Animal : MonoBehaviour
 
         FoodTImer += Time.deltaTime * 2.4f;
         WaterAndTreeTimer += Time.deltaTime * 2.4f;
-        TreeTimer += Time.deltaTime * 2.4f;
         if (FoodTImer >= 60f)
         {
             FoodTImer -= 60f;

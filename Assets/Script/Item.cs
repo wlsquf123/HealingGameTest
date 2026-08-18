@@ -17,11 +17,14 @@ public class Item : MonoBehaviour
 
     private void Start()
     {
-        ItemState = (ItemType)Random.Range(0, 6);
+        ItemState = (ItemType)Random.Range(0, 7);
     }
 
     private void OnMouseDown()
     {
-        Destroy(gameObject);
+        if (GameManager.instance.InventoryManager.AddItem(ItemState))
+        {
+            Destroy(gameObject);
+        }
     }
 }

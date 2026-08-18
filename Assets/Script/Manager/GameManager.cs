@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public UIManager UIManager;
     public FSMManager FSMManager;
+    public InventoryManager InventoryManager;
 
     [Header("»óÅÂ")]
     public float M; // ºĞ

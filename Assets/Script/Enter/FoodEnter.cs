@@ -8,7 +8,7 @@ public class FoodEnter : MonoBehaviour
 
         var An = other.GetComponent<Animal>();
 
-        if (An.Animalfood < 30f)
+        if (An.Animalfood <= 30f)
         {
             An.Animalfood = 100f;
             An.AddExp(5);

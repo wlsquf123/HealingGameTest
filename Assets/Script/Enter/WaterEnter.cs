@@ -8,7 +8,7 @@ public class WaterEnter : MonoBehaviour
 
         var An = other.GetComponent<Animal>();
 
-        if (An.Animalwater < 30f)
+        if (An.Animalwater <= 30f)
         {
             An.Animalwater = 100f;
             An.AddExp(3);

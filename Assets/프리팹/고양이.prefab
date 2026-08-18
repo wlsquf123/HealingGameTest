@@ -1328,6 +1328,7 @@ GameObject:
   - component: {fileID: 2736967479962173998}
   - component: {fileID: 1496715900458405598}
   - component: {fileID: 5825666231352581209}
+  - component: {fileID: -663480986965372793}
   m_Layer: 0
   m_Name: "\uACE0\uC591\uC774"
   m_TagString: Animal
@@ -1448,6 +1449,20 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 8
+--- !u!114 &-663480986965372793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6939147084307642480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f1b692c71032d746971f7b38e5b7aec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalEnter
+  Merge: 0
+  animal: {fileID: 5038043502890226346}
 --- !u!1 &7059312676591757930
 GameObject:
   m_ObjectHideFlags: 0

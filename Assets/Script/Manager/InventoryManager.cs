@@ -11,6 +11,7 @@ public class InventoryManager : MonoBehaviour
     public int allHpCount;
     public int ThunderCount;
 
+    public GameObject inven;
     public GameObject[] itemImage;
     public Text[] itemText;
 
@@ -89,6 +90,11 @@ public class InventoryManager : MonoBehaviour
                 break;
             case 6:
                 ThunderCount--;
+                var Animals = FindObjectsByType<Animal>(FindObjectsSortMode.None);
+                foreach (var An in Animals)
+                {
+                    An.isThunder = true;
+                }
                 break;
         }
     }

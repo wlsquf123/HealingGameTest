@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     public UIManager UIManager;
     public FSMManager FSMManager;
     public InventoryManager InventoryManager;
+    public WeatherManager WeatherManager;
 
     [Header("»óÅÂ")]
     public float M; // ºÐ
@@ -27,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        
+        Chatkey();
         M += Time.deltaTime * 2.4f;
         if (M >= 60f)
         {
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
         {
             H -= 24;
             Day++;
+            WeatherManager.RandomWeather();
         }
 
         PointTimer += Time.deltaTime * 2.4f;
@@ -60,8 +62,11 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
-    public void DayTImer()
+    public void Chatkey()
     {
-
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            WeatherManager.WeatherChatKey();
+        }
     }
 }

@@ -24,12 +24,15 @@ public class Animal : MonoBehaviour
     public float Animalwater = 50f;
     public float AnimalHp = 100f;
     public float AnimalSpeed;
+    public float currentSpeed;
 
-    private float FoodTImer;
-    private float WaterAndTreeTimer;
-
+    [Header("번개 1회성무적")]
+    public bool isThunder = false;
+    
     [Header("타이머")]
     public float IdleTImer;
+    private float FoodTImer = 0f;
+    private float WaterAndTreeTimer = 0f;
 
     [Header("")]
     private Vector3 dir = Vector3.forward;
@@ -93,7 +96,14 @@ public class Animal : MonoBehaviour
         {
             WaterAndTreeTimer -= 30f;
             Animalwater = Mathf.Clamp(Animalwater - 10f, 0, 100f);
-            AnimalHp = Mathf.Clamp(AnimalHp - 5f, 0, 100f);
+            if (GameManager.instance.WeatherManager.WeatherType == WeatherState.비)
+            {
+                AnimalHp = Mathf.Clamp(AnimalHp - 10f, 0, 100f);
+            }
+            else
+            {
+                AnimalHp = Mathf.Clamp(AnimalHp - 5f, 0, 100f);
+            }
         }
     }
 
@@ -155,8 +165,17 @@ public class Animal : MonoBehaviour
 
     public void MoveState()
     {
+
+        if (GameManager.instance.WeatherManager.WeatherType == WeatherState.흐림)
+        {
+            currentSpeed = 0.5f;
+        }
+        else
+        {
+            currentSpeed = AnimalSpeed;
+        }
         transform.rotation = Quaternion.LookRotation(dir);
-        transform.Translate(Vector3.forward * AnimalSpeed * Time.deltaTime);
+        transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
 
         IdleTImer -= Time.deltaTime * 2.4f;
         if (IdleTImer <= 0)

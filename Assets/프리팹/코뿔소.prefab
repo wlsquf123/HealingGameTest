@@ -959,6 +959,7 @@ GameObject:
   - component: {fileID: 4610545797251555070}
   - component: {fileID: 5605483291482456448}
   - component: {fileID: 6863275436769205010}
+  - component: {fileID: -5729713948448747852}
   m_Layer: 0
   m_Name: "\uCF54\uBFD4\uC18C"
   m_TagString: Animal
@@ -999,7 +1000,7 @@ MonoBehaviour:
   StateType: 5
   AnName: "\uCF54\uBFD4\uC18C"
   AnimalLevel: 1
-  Rating: 1
+  Rating: 4
   AnimalExp: 0
   Animalfood: 50
   Animalwater: 50
@@ -1079,6 +1080,20 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 8
+--- !u!114 &-5729713948448747852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3945293699559011184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f1b692c71032d746971f7b38e5b7aec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalEnter
+  Merge: 0
+  animal: {fileID: 3278099573825459805}
 --- !u!1 &5660058254214681052
 GameObject:
   m_ObjectHideFlags: 0

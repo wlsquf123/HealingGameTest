@@ -8,9 +8,9 @@ public class TreeEnter : MonoBehaviour
 
         var An = other.GetComponent<Animal>();
 
-        if (An.AnimalHp < 30f)
+        if (An.Hp < 30f)
         {
-            An.AnimalHp = 100f;
+            An.Hp = 100f;
             An.AddExp(4);
         }
     }

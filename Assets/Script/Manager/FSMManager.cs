@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class FSMManager : MonoBehaviour
 {
-    public List<GameObject> FoodList;
-    public List<GameObject> WaterList;
-    public List<GameObject> TreeList;
-
     public GameObject foodObj;
     public GameObject WaterObj;
     public GameObject TreeObj;
@@ -34,19 +30,19 @@ public class FSMManager : MonoBehaviour
                 case 1:
                     if (GameManager.instance.GetPoint(10))
                     {
-                        FoodList.Add(Instantiate(foodObj, pos, Quaternion.identity));
+                        Instantiate(foodObj, pos, Quaternion.identity);
                     }
                     break;
                 case 2:
                     if (GameManager.instance.GetPoint(10))
                     {
-                        WaterList.Add(Instantiate(WaterObj, pos, Quaternion.identity));
+                        Instantiate(WaterObj, pos, Quaternion.identity);
                     }
                     break;
                 case 3:
                     if (GameManager.instance.GetPoint(20))
                     {
-                        TreeList.Add(Instantiate(TreeObj, pos, Quaternion.identity));
+                        Instantiate(TreeObj, pos, Quaternion.identity);
                     }
                     break;
                 case 4:
@@ -58,8 +54,5 @@ public class FSMManager : MonoBehaviour
             }
             set = 0;
         }
-
-
-        
     }
 }

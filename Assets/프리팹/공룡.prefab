@@ -551,16 +551,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d538c7ca1380a95438a78c236a10e566, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Animal
-  StateType: 5
+  StateType: 4
   AnName: "\uACF5\uB8E1"
   AnimalLevel: 1
   Rating: 5
   AnimalExp: 0
-  Animalfood: 50
-  Animalwater: 50
-  AnimalHp: 100
+  Food: 50
+  Water: 50
+  Hp: 100
   AnimalSpeed: 10
+  currentSpeed: 0
+  isThunder: 0
   IdleTImer: 0
+  target: {fileID: 0}
   LvText: {fileID: 7060672511915362630}
   ExpImage: {fileID: 5481967890286158636}
   FoodImage: {fileID: 5593674596371181977}

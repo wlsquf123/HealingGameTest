@@ -8,9 +8,9 @@ public class WaterEnter : MonoBehaviour
 
         var An = other.GetComponent<Animal>();
 
-        if (An.Animalwater <= 30f)
+        if (An.Water <= 30f)
         {
-            An.Animalwater = 100f;
+            An.Water = 100f;
             An.AddExp(3);
             GameManager.instance.FSMManager.WaterList.Remove(gameObject);
             Destroy(gameObject);

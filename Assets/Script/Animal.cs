@@ -2,15 +2,15 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
 public enum AnimalState
 {
-    None,
-    Move,
-    Food,
-    Water,
-    Rest,
-    Idle
+    이동,
+    배고픔,
+    수분,
+    휴식,
+    대기
 }
 public class Animal : MonoBehaviour
 {
@@ -20,9 +20,9 @@ public class Animal : MonoBehaviour
     public int AnimalLevel = 1;
     public int Rating;
     public float AnimalExp;
-    public float Animalfood = 50f;
-    public float Animalwater = 50f;
-    public float AnimalHp = 100f;
+    public float Food = 50f;
+    public float Water = 50f;
+    public float Hp = 100f;
     public float AnimalSpeed;
     public float currentSpeed;
 
@@ -36,6 +36,7 @@ public class Animal : MonoBehaviour
 
     [Header("")]
     private Vector3 dir = Vector3.forward;
+    public GameObject target;
 
     [Header("UI")]
     public Text LvText;
@@ -57,43 +58,43 @@ public class Animal : MonoBehaviour
         // state (상태 UI)
         LvText.text = AnimalLevel.ToString();
         ExpImage.fillAmount = AnimalExp / 10f;
-        FoodImage.fillAmount = Animalfood / 100f;
-        WaterImage.fillAmount = Animalwater / 100f;
-        HpImage.fillAmount = AnimalHp / 100f;
+        FoodImage.fillAmount = Food / 100f;
+        WaterImage.fillAmount = Water / 100f;
+        HpImage.fillAmount = Hp / 100f;
         ExpText.text = AnimalExp + " / 10";
-        FoodText.text = Animalfood + " / 100";
-        WaterText.text = Animalwater + " / 100";
-        HpText.text = AnimalHp + "/ 100";
+        FoodText.text = Food + " / 100";
+        WaterText.text = Water + " / 100";
+        HpText.text = Hp + "/ 100";
 
-        if (Animalwater < 30 && GameManager.instance.FSMManager.WaterList.Count > 0)
+        if (Water < 30 && GameObject.FindGameObjectWithTag("Water") != null)
         {
-            StateType = AnimalState.Water;
+            StateType = AnimalState.수분;
         }
-        else if (Animalfood < 30 && GameManager.instance.FSMManager.FoodList.Count > 0)
+        else if (Food < 30 && GameObject.FindGameObjectWithTag("Food") != null)
         {
-            StateType = AnimalState.Food;
+            StateType = AnimalState.배고픔;
         }
-        else if (AnimalHp < 30 && GameManager.instance.FSMManager.TreeList.Count > 0)
+        else if (Hp < 30 && GameObject.FindGameObjectWithTag("Tree") != null)
         {
-            StateType = AnimalState.Rest;
+            StateType = AnimalState.휴식;
         }
 
 
         switch (StateType)
         {
-            case AnimalState.Idle:
+            case AnimalState.대기:
                 IdleState();
                 break;
-            case AnimalState.Move:
+            case AnimalState.이동:
                 MoveState();
                 break;
-            case AnimalState.Food:
+            case AnimalState.배고픔:
                 FoodState();
                 break;
-            case AnimalState.Water:
+            case AnimalState.수분:
                 WaterState();
                 break;
-            case AnimalState.Rest:
+            case AnimalState.휴식:
                 TreeState();
                 break;
         }
@@ -103,19 +104,19 @@ public class Animal : MonoBehaviour
         if (FoodTImer >= 60f)
         {
             FoodTImer -= 60f;
-            Animalfood = Mathf.Clamp(Animalfood - 10f, 0, 100f);
+            Food = Mathf.Clamp(Food - 10f, 0, 100f);
         }
         if (WaterAndTreeTimer >= 30f)
         {
             WaterAndTreeTimer -= 30f;
-            Animalwater = Mathf.Clamp(Animalwater - 10f, 0, 100f);
+            Water = Mathf.Clamp(Water - 10f, 0, 100f);
             if (GameManager.instance.WeatherManager.WeatherType == WeatherState.비)
             {
-                AnimalHp = Mathf.Clamp(AnimalHp - 10f, 0, 100f);
+                Hp = Mathf.Clamp(Hp - 10f, 0, 100f);
             }
             else
             {
-                AnimalHp = Mathf.Clamp(AnimalHp - 5f, 0, 100f);
+                Hp = Mathf.Clamp(Hp - 5f, 0, 100f);
             }
         }
     }
@@ -126,11 +127,11 @@ public class Animal : MonoBehaviour
 
         switch (StateType)
         {
-            case AnimalState.Idle:
+            case AnimalState.대기:
                 IdleTImer = 60f;
                 AnimalAnimator.Play("Idle");
                 break;
-            case AnimalState.Move:
+            case AnimalState.이동:
                 dir.x = Random.Range(-10f, 10f);
                 dir.z = Random.Range(-10f, 10f);
                 IdleTImer = 3f;
@@ -144,54 +145,48 @@ public class Animal : MonoBehaviour
         AnimalExp = Mathf.Clamp(AnimalExp + add, 0, 10f);
     }
 
-    public void RandomAI()
+    public void RandomState()
     {
-        int index = Random.Range(0, 2);
+        int random = Random.Range(0, 2);
 
-        if (index == 0)
+        if (random == 0)
         {
-            Change(AnimalState.Idle);
-        }
-        else
-        {
-            if (Animalfood <= 0 || Animalwater <= 0 || AnimalHp <= 0)
+            if (Food <= 0 || Water <= 0 || Hp <= 0)
             {
-                Change(AnimalState.Idle);
+                Change(AnimalState.대기);
                 return;
             }
 
-            Change(AnimalState.Move);
+            Change(AnimalState.이동);
             AddExp(1);
+        }
+        else
+        {
+            Change(AnimalState.대기);
         }
     }
 
-    public void MoveToTarget(List<GameObject> targetList)
+    public void FindTag(string tag)
     {
-        if (targetList == null || targetList.Count == 0)
+        GameObject[] objects = GameObject.FindGameObjectsWithTag(tag);
+
+        target = null;
+        float minDir = 999999999f;
+
+        foreach (GameObject obj in objects)
         {
-            RandomAI();
-            return;
-        }
+            float dis = Vector3.Distance(transform.position, obj.transform.position); // 내 동물거리랑 오브젝트의 거리를 구함.
 
-        GameObject nearestTarget = targetList[0];
-        float nearestDistance = 999999999999f;
-
-        // 가장 가까운 타겟 찾기
-        foreach (GameObject target in targetList)
-        {
-            float currentDistance = Vector3.SqrMagnitude(transform.position - target.transform.position);
-
-            if (currentDistance < nearestDistance)
+            if (dis < minDir)
             {
-                nearestDistance = currentDistance;
-                nearestTarget = target;
+                minDir = dis;
+                target = obj;
             }
         }
+        if (target == null) return;
 
-        // 타겟을 향해 이동
-        AnimalAnimator.Play("Move");
-        transform.LookAt(nearestTarget.transform);
-        transform.position = Vector3.MoveTowards(transform.position, nearestTarget.transform.position, currentSpeed * Time.deltaTime);
+        transform.LookAt(target.transform);
+        transform.position = Vector3.MoveTowards(transform.position, target.transform.position, currentSpeed * Time.deltaTime); // 거리 계산 
     }
 
     public void IdleState()
@@ -200,7 +195,7 @@ public class Animal : MonoBehaviour
 
         if (IdleTImer <= 0)
         {
-            RandomAI();
+            RandomState();
         }
     }
 
@@ -221,37 +216,37 @@ public class Animal : MonoBehaviour
         IdleTImer -= Time.deltaTime * 2.4f;
         if (IdleTImer <= 0)
         {
-            RandomAI();
+            RandomState();
         }
     }
 
     public void FoodState()
     {
-        if (Animalfood >= 30)
+        FindTag("Food");
+
+        if (Food >= 30 || target == null)
         {
-            RandomAI();
-            return;
+            RandomState();
         }
-        MoveToTarget(GameManager.instance.FSMManager.FoodList);
     }
 
     public void WaterState()
     {
-        if (Animalwater >= 30)
+        FindTag("Water");
+
+        if (Water >= 30 || target == null)
         {
-            RandomAI();
-            return;
+            RandomState();
         }
-        MoveToTarget(GameManager.instance.FSMManager.WaterList);
     }
 
     public void TreeState()
     {
-        if (AnimalHp >= 30)
+        FindTag("Tree");
+
+        if (Hp >= 30 || target == null)
         {
-            RandomAI();
-            return;
+            RandomState();
         }
-        MoveToTarget(GameManager.instance.FSMManager.TreeList);
     }
 }

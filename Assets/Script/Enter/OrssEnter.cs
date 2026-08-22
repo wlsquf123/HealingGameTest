@@ -8,9 +8,9 @@ public class OrssEnter : MonoBehaviour
 
         var An = other.GetComponent<Animal>();
 
-        if (An.Animalwater <= 30f)
+        if (An.Water <= 30f)
         {
-            An.Animalwater = 100f;
+            An.Water = 100f;
             An.AddExp(3);
         }
     }

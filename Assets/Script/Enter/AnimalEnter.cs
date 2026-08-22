@@ -25,12 +25,12 @@ public class AnimalEnter : MonoBehaviour
 
             transform.localScale *= 1.25f;
             animal.AnimalLevel++;
-            animal.AnimalHp = 100f;
-            animal.Animalfood = 50f;
-            animal.Animalwater = 50f;
+            animal.Hp = 100f;
+            animal.Food = 50f;
+            animal.Water = 50f;
             animal.AnimalExp = 0;
 
-            animal.Change(AnimalState.Idle);
+            animal.Change(AnimalState.대기);
 
             Merge = false;
         }

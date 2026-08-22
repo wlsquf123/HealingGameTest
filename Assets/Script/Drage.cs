@@ -11,7 +11,7 @@ public class Drage : MonoBehaviour
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, ground, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, ground))
         {
             transform.position = hit.point + Vector3.up;
         }

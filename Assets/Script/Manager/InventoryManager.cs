@@ -112,13 +112,13 @@ public class InventoryManager : MonoBehaviour
                 switch (item)
                 {
                     case ItemType.allfoodItem:
-                        an.Animalfood = Mathf.Clamp(an.Animalfood + 1f, 0, 100f);
+                        an.Food = Mathf.Clamp(an.Food + 1f, 0, 100f);
                         break;
                     case ItemType.allwaterItem:
-                        an.Animalwater = Mathf.Clamp(an.Animalwater+ 1f, 0, 100f);
+                        an.Water = Mathf.Clamp(an.Water+ 1f, 0, 100f);
                         break;
                     case ItemType.allHpItem:
-                        an.AnimalHp = Mathf.Clamp(an.AnimalHp+ 1f, 0, 100f);
+                        an.Hp = Mathf.Clamp(an.Hp+ 1f, 0, 100f);
                         break;
                 }
             }

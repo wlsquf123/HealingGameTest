@@ -12,7 +12,6 @@ public class WaterEnter : MonoBehaviour
         {
             An.Water = 100f;
             An.AddExp(3);
-            GameManager.instance.FSMManager.WaterList.Remove(gameObject);
             Destroy(gameObject);
         }
     }

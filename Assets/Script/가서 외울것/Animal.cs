@@ -1,8 +1,5 @@
-using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.GraphicsBuffer;
 
 public enum AnimalState
 {
@@ -35,8 +32,8 @@ public class Animal : MonoBehaviour
     private float WaterAndTreeTimer = 0f;
 
     [Header("")]
-    private Vector3 dir = Vector3.forward;
-    public GameObject target;
+    private Vector3 dir;
+    private GameObject target;
 
     [Header("UI")]
     public Text LvText;
@@ -51,7 +48,6 @@ public class Animal : MonoBehaviour
 
     [Header("애니메이션")]
     public Animator AnimalAnimator;
-
 
     private void Update()
     {
@@ -78,7 +74,6 @@ public class Animal : MonoBehaviour
         {
             StateType = AnimalState.휴식;
         }
-
 
         switch (StateType)
         {

@@ -9,18 +9,24 @@ public class CamerMove : MonoBehaviour // 이 코드도 외우야할듯 ㅠ.
     {
         if (Time.timeScale == 0f) return;
 
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(1)) // 마우스 우클릭중이라면
         {
-            if (Input.GetKey(KeyCode.LeftShift)) MoveSpeed = 20f; // 시프트 시 속도 20 증가
-            else MoveSpeed = 10f;
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                MoveSpeed = 20f; // 시프트 시 속도 20 증가
+            }
+            else
+            {
+                MoveSpeed = 10f;
+            }
             float x = Input.GetAxis("Mouse X");
             float y = Input.GetAxis("Mouse Y");
-            transform.Rotate(0, x * RotSpeed, 0, Space.World);
+            transform.Rotate(0, x * RotSpeed, 0, 0);
             transform.Rotate(-y * RotSpeed, 0, 0);
         }
 
-        float zKey = Input.GetAxis("Vertical");
         float xKey = Input.GetAxis("Horizontal");
+        float zKey = Input.GetAxis("Vertical");
 
         transform.Translate(xKey * MoveSpeed * Time.deltaTime, 0, zKey * MoveSpeed * Time.deltaTime);
     }

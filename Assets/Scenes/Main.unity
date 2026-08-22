@@ -6528,13 +6528,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cccfcedc516cb9f43902fabe1a22fb28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FSMManager
-  FoodList: []
-  WaterList:
-  - {fileID: 1177861240}
-  - {fileID: 1357095398}
-  - {fileID: 340916057}
-  - {fileID: 1075477471}
-  TreeList: []
   foodObj: {fileID: 7059900780065248932, guid: e0677740b0e87fa4ca84c0f2611060b6, type: 3}
   WaterObj: {fileID: 599512773477237359, guid: dad922963d79e0e41b5ada950d3c780f, type: 3}
   TreeObj: {fileID: 4849497662078464371, guid: 849a4b758dc1a0a499436a76f18f8176, type: 3}

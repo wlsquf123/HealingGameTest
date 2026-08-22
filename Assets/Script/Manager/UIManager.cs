@@ -19,8 +19,6 @@ public class UIManager : MonoBehaviour
         DayText.text = "Day" + gm.Day + "\n" + gm.H.ToString("00") + ":" + gm.M.ToString("00"); // 시간
         PointText.text = "포인트: " + gm.Point;
         WeatherText.text = "현재 날씨: " + GameManager.instance.WeatherManager.WeatherType;
-
-
     }
 
 

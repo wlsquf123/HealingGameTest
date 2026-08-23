@@ -64,9 +64,25 @@ public class GameManager : MonoBehaviour
 
     public void Chatkey()
     {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+
+        }
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+
+        }
+        if (Input.GetKeyDown(KeyCode.F3))
+        {
+
+        }
         if (Input.GetKeyDown(KeyCode.F4))
         {
             WeatherManager.WeatherChatKey();
+        }
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+
         }
     }
 }

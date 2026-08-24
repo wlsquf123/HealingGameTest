@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public FSMManager FSMManager;
     public InventoryManager InventoryManager;
     public WeatherManager WeatherManager;
+    public AudioManager AudioManager;
 
     [Header("상태")]
     public float M; // 분
@@ -14,7 +15,7 @@ public class GameManager : MonoBehaviour
     public int Day = 1; // 일
     public int Point = 0;
     private float PointTimer;
-
+    public GameObject Effect;
 
     private void Awake()
     {

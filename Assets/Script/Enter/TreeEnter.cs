@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class TreeEnter : MonoBehaviour
 {
+    private void Start()
+    {
+        GameManager.instance.AudioManager.SFX[1].Play();
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (!other.CompareTag("Animal")) return;

@@ -16,7 +16,7 @@ public class Animal : MonoBehaviour
     public string AnName;
     public int AnimalLevel = 1;
     public int Rating;
-    public float AnimalExp;
+    public int Exp = 0;
     public float Food = 50f;
     public float Water = 50f;
     public float Hp = 100f;
@@ -49,15 +49,20 @@ public class Animal : MonoBehaviour
     [Header("애니메이션")]
     public Animator AnimalAnimator;
 
+    private void Start()
+    {
+        GameManager.instance.AudioManager.SFX[1].Play();
+    }
+
     private void Update()
     {
         // state (상태 UI)
         LvText.text = AnimalLevel.ToString();
-        ExpImage.fillAmount = AnimalExp / 10f;
+        ExpImage.fillAmount = Exp / 10;
         FoodImage.fillAmount = Food / 100f;
         WaterImage.fillAmount = Water / 100f;
         HpImage.fillAmount = Hp / 100f;
-        ExpText.text = AnimalExp + " / 10";
+        ExpText.text = Exp + " / 10";
         FoodText.text = Food + " / 100";
         WaterText.text = Water + " / 100";
         HpText.text = Hp + "/ 100";
@@ -130,6 +135,7 @@ public class Animal : MonoBehaviour
                 dir.x = Random.Range(-10f, 10f);
                 dir.z = Random.Range(-10f, 10f);
                 IdleTImer = 3f;
+                AddExp(1);
                 AnimalAnimator.Play("Move");
                 break;
         }
@@ -137,7 +143,7 @@ public class Animal : MonoBehaviour
 
     public void AddExp(int add)
     {
-        AnimalExp = Mathf.Clamp(AnimalExp + add, 0, 10f);
+        Exp = Mathf.Clamp(Exp + add, 0, 10);
     }
 
     public void RandomState()
@@ -153,7 +159,6 @@ public class Animal : MonoBehaviour
             }
 
             Change(AnimalState.이동);
-            AddExp(1);
         }
         else
         {

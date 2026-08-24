@@ -2,8 +2,23 @@ using UnityEngine;
 
 public class Drage : MonoBehaviour
 {
-    // 이 코드는 외워야한다
     public LayerMask ground;
+
+    private void OnMouseDown()
+    {
+        if (CompareTag("Animal"))
+        {
+            Debug.Log("표시");
+        }
+    }
+
+    private void OnMouseUp()
+    {
+        if (CompareTag("Animal"))
+        {
+            Debug.Log("꺼짐");
+        }
+    }
 
     private void OnMouseDrag()
     {

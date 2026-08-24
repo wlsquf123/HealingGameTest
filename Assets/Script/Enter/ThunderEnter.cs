@@ -4,6 +4,7 @@ public class ThunderEnter : MonoBehaviour
 {
     private void Start()
     {
+        GameManager.instance.AudioManager.SFX[3].Play();
         Destroy(gameObject, 0.1f);
     }
 
